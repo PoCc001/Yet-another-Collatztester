@@ -24,7 +24,7 @@
 #include "carpcontainer.hpp"
 #include <intrin.h>
 
-#define trailingZerosCount(x) (_tzcnt_u64((x)))
+#define trailing_zeros_count(x) (_tzcnt_u64((x)))
 
 #define is_even_small(x) (!((x) & 1))
 #define is_odd_small(x) ((x) & 1)
@@ -35,7 +35,7 @@
 #define odd_small(x) ((x) * 3 + 1)
 #define even_small(x) ((x) >> 1)
 #define even_multiple_small(x, s) ((x) >> (s))
-#define even_all_small(x) (even_multiple_small((x), trailingZerosCount((x))))
+#define even_all_small(x) (even_multiple_small((x), trailing_zeros_count((x))))
 
 #define odd_big(x, t) ((x).mul3p1(t))
 #define even_big(x) ((x).rshift(1))
