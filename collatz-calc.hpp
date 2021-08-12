@@ -24,7 +24,7 @@
 #include "carpcontainer.hpp"
 #include <intrin.h>
 
-#define trailingZerosCount(x) (_tzcnt_u64((v)))
+#define trailingZerosCount(x) (_tzcnt_u64((x)))
 
 #define is_even_small(x) (!((x) & 1))
 #define is_odd_small(x) ((x) & 1)
