@@ -114,7 +114,7 @@ public:
 	}
 
 	std::uint64_t toUInt64() const noexcept {
-		return length >= 2 ? dvp[0] : dvp[0] & 0xffffffffULL;
+		return return dvp[0];
 	}
 
 	bool isEven() const noexcept {
