@@ -30,7 +30,7 @@ inline void test(const std::uint64_t& i, tinybigint& big, std::uint64_t* tmp) {
 
 	while (true) {
 		if (small <= SMALL_THRESHOLD) {
-			if (small < i) {
+			if (small < i) CPP20UNLIKELY {
 				break;
 			}
 
@@ -38,7 +38,7 @@ inline void test(const std::uint64_t& i, tinybigint& big, std::uint64_t* tmp) {
 			small = even_all_small(small);
 		}
 		else {
-			if (small != 0xffffffffffffffffULL) {
+			if (small != 0xffffffffffffffffULL) CPP20UNLIKELY {
 				big.set(small);
 				small = 0xffffffffffffffffULL;
 			}
@@ -76,7 +76,7 @@ int main() {
 		if (i % 1000000000ULL == 1ULL) {
       printf("%g\t\n", (double)(i));
       
-      if (i % 5000000000ULL == 1ULL) {
+      if (i % 5000000000ULL == 1ULL) CPP20UNLIKELY {
 			  std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
         double tmptime = std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() / 1000.0;
 			  double timediff = tmptime - fulltime;
