@@ -54,7 +54,7 @@ inline void test(const std::uint64_t& i, tinybigint& big, std::uint64_t* tmp) {
 				exit(0);
 			}
 
-			if (big.getLength() <= 2) {
+			if (big.getLength() == 1) {
 				small = big.toUInt64();
 			}
 		}
