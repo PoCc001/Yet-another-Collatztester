@@ -23,6 +23,15 @@
 #include <string>
 #include <intrin.h>
 
+// use [[likely]] and [[unlikely]] to optimize branch prediction, if a C++20 compiler is used
+#if defined(_MSVC_LANG) && _MSVC_LANG > 201703L
+#define CPP20LIKELY [[likely]]
+#define CPP20UNLIKELY [[unlikely]]
+#else
+#define CPP20LIKELY
+#define CPP20UNLIKELY
+#endif
+
 #define EXCEPTION_TEXT "Exceeds size of this tinybigint!"
 
 class tinybigint {
@@ -33,7 +42,7 @@ class tinybigint {
 public:
 	tinybigint() = delete;
 	tinybigint(unsigned long long v, std::uint64_t* mem, std::size_t s = 16) {
-		if (s < 1) {
+		if (s < 1) CPP20UNLIKELY {
 			throw std::string("The size must be at least 1!");
 		}
 
@@ -108,7 +117,7 @@ public:
 		if (length < size && (carry != 0 || tmp[length] != 0)) {
 			dvp[length] = tmp[length] + (std::uint64_t)(carry);
 			++length;
-		} else if ((carry != 0 || tmp[length] != 0) && length == size) {
+		} else if ((carry != 0 || tmp[length] != 0) && length == size) CPP20UNLIKELY {
 			throw std::string(EXCEPTION_TEXT);
 		}
 	}
