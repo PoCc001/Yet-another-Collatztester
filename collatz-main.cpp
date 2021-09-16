@@ -25,7 +25,7 @@
 constexpr std::uint64_t SMALL_THRESHOLD = UINT64_MAX / 3 - 1;
 constexpr std::size_t WORDS = 16; // multiplying WORDS by 64 equals the number of bits tinybigint will use
 
-inline void test(const std::uint64_t& i, tinybigint& big, std::uint64_t* tmp) {
+inline void collatzTest(const std::uint64_t& i, tinybigint& big, std::uint64_t* tmp) {
 	std::uint64_t small = i;
 
 	while (true) {
@@ -69,26 +69,27 @@ int main() {
 	tinybigint big{ i, dvp, WORDS };
 	std::uint64_t tmp[WORDS + 1];
 	tmp[0] = 0ULL;
+	double fulltime = 0.0;
 
   std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 	for (; i < UINT64_MAX; i += 4ULL) {
 		small = i;
-		if (i % 1000000000ULL == 1ULL) {
-      printf("%g\t\n", (double)(i));
-      
-      if (i % 5000000000ULL == 1ULL) CPP20UNLIKELY {
-			  std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-        double tmptime = std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() / 1000.0;
-			  double timediff = tmptime - fulltime;
-			  fulltime = tmptime;
-			  printf("\t%fs.\t%fs.\n", fulltime, timediff);
-      }
+		if (i % 1000000000ULL == 3ULL) CPP20UNLIKELY {
+		std::printf("%g\t", (double)(i));
+
+			if (i % 10000000000ULL == 3ULL) CPP20UNLIKELY {
+				std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+				double tmptime = (double)(std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count()) / 1000.0;
+				double timediff = tmptime - fulltime;
+				fulltime = tmptime;
+				std::printf("\t%fs.\t%fs.\n", fulltime, timediff);
+			}
 		}
 
 		if (i % 3ULL == 1ULL) {
 			continue;
 		}
 
-		test(i, big, tmp);
+		collatzTest(i, big, tmp);
 	}
 }
