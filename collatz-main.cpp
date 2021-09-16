@@ -99,8 +99,8 @@ int main() {
 			even_all_big(big);
 		}
 		catch (std::string s) {
-			std::cout << "The number " << i << " makes the brute-force algorithm exceed the " <<
-				(WORDS << 6) << "bit limit!";
+		/*	std::cout << "The number " << big << " makes the brute-force algorithm exceed the " <<
+				(WORDS << 6) << "bit limit!"; */
 			system("PAUSE");
 			return EXIT_FAILURE;
 		}
