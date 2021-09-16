@@ -107,6 +107,17 @@ public:
 		return cnt;
 	}
 
+	void add(std::uint64_t a) {
+		std::uint8_t carry = 0;
+		carry = _addcarry_u64(carry, dvp[0], a, dvp);
+		for (std::size_t i = 0; i < length; ++i) {
+			if (!carry) CPP20LIKELY {
+				return;
+			}
+			carry = _addcarry_u64(carry, dvp[i], 0, dvp + i);
+		}
+	}
+
 	void mul3p1(std::uint64_t* tmp) {
 		std::uint8_t carry = 1;
 		for (std::size_t i = 0; i < length; ++i) {
@@ -123,7 +134,7 @@ public:
 	}
 
 	std::uint64_t toUInt64() const noexcept {
-		return return dvp[0];
+		return dvp[0];
 	}
 
 	bool isEven() const noexcept {
