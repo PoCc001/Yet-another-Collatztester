@@ -30,7 +30,7 @@ inline void collatzTest(const std::uint64_t& i, tinybigint& big, std::uint64_t* 
 
 	while (true) {
 		if (small <= SMALL_THRESHOLD) {
-			if (small < i) CPP20UNLIKELY {
+			if (small < i) CPP20UNLIKELY{
 				break;
 			}
 
@@ -38,12 +38,12 @@ inline void collatzTest(const std::uint64_t& i, tinybigint& big, std::uint64_t* 
 			small = even_all_small(small);
 		}
 		else {
-			if (small != 0xffffffffffffffffULL) CPP20UNLIKELY {
+			if (small != 0xffffffffffffffffULL) CPP20UNLIKELY{
 				big.set(small);
 				small = 0xffffffffffffffffULL;
 			}
 
-			try {
+				try {
 				odd_big(big, tmp);
 				even_all_big(big);
 			}
@@ -51,7 +51,7 @@ inline void collatzTest(const std::uint64_t& i, tinybigint& big, std::uint64_t* 
 				std::cout << "The number " << i << " makes the brute-force algorithm exceed the " <<
 					(WORDS << 6) << "bit limit!";
 				system("PAUSE");
-				exit(0);
+				exit(1);
 			}
 
 			if (big.getLength() == 1) {
@@ -71,10 +71,10 @@ int main() {
 	tmp[0] = 0ULL;
 	double fulltime = 0.0;
 
-  std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 	for (; i < UINT64_MAX; i += 4ULL) {
 		small = i;
-		if (i % 1000000000ULL == 3ULL) CPP20UNLIKELY {
+		if (i % 1000000000ULL == 3ULL) CPP20UNLIKELY{
 		std::printf("%g\t", (double)(i));
 
 			if (i % 10000000000ULL == 3ULL) CPP20UNLIKELY {
@@ -86,10 +86,25 @@ int main() {
 			}
 		}
 
-		if (i % 3ULL == 1ULL) {
-			continue;
-		}
+			if (i % 3ULL == 1ULL) {
+				continue;
+			}
 
-		collatzTest(i, big, tmp);
+			collatzTest(i, big, tmp);
 	}
+
+	for (;; big.add(4ULL)) {
+		try {
+			odd_big(big, tmp);
+			even_all_big(big);
+		}
+		catch (std::string s) {
+			std::cout << "The number " << i << " makes the brute-force algorithm exceed the " <<
+				(WORDS << 6) << "bit limit!";
+			system("PAUSE");
+			return EXIT_FAILURE;
+		}
+	}
+
+	return EXIT_SUCCESS;
 }
