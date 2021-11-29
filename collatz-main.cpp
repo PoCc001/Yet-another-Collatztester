@@ -75,7 +75,7 @@ int main() {
 	for (; i < UINT64_MAX; i += 4ULL) {
 		small = i;
 		if (i % 1000000000ULL == 3ULL) CPP20UNLIKELY{
-		std::printf("%g\t", (double)(i));
+			std::printf("%g\t", (double)(i));
 
 			if (i % 10000000000ULL == 3ULL) CPP20UNLIKELY {
 				std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
@@ -85,12 +85,7 @@ int main() {
 				std::printf("\t%fs.\t%fs.\n", fulltime, timediff);
 			}
 		}
-
-			if (i % 3ULL == 1ULL) {
-				continue;
-			}
-
-			collatzTest(i, big, tmp);
+		collatzTest(i, big, tmp);
 	}
 
 	for (;; big.add(4ULL)) {
