@@ -85,6 +85,11 @@ int main() {
 				std::printf("\t%fs.\t%fs.\n", fulltime, timediff);
 			}
 		}
+		
+		if ((i << 1) % 3 == 1) {
+			continue;
+		}
+		
 		collatzTest(i, big, tmp);
 	}
 
