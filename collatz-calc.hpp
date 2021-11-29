@@ -20,8 +20,6 @@
  *  along with Yet Another Collatztester.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-#include "carpcontainer.hpp"
 #include <intrin.h>
 
 #define trailing_zeros_count(x) (_tzcnt_u64((x)))
