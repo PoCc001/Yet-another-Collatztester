@@ -86,7 +86,7 @@ int main() {
 			}
 		}
 		
-		if ((i << 1) % 3 == 1) {
+		if (i % 3 == 2) {
 			continue;
 		}
 		
