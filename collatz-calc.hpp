@@ -4,7 +4,7 @@
 /**
  * This file is part of Yet Another Collatztester.
  *
- *  Copyright (C) 2021  Johannes Kloimböck
+ *  Copyright (C) 2021 - 2022  Johannes Kloimböck
  *
  *  Yet Another Collatztester is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
